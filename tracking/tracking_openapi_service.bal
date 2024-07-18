@@ -47,7 +47,7 @@ service / on new http:Listener(9090) {
             return <http:NotFound>{body: "Order not found"};
         }
 
-        ShippingResponse|error shippingRes = shippingClient->get("/track" + orderRes.trackingNumber);
+        ShippingResponse|error shippingRes = shippingClient->get("/track/?trackingId=" + orderRes.trackingNumber + "&companyName=2");
         if (shippingRes is error) {
             io:println("Error occurred: ", shippingRes);
             return <http:InternalServerError>{body: "Error occurred while retrieving tracking information"};

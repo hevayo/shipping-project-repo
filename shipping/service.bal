@@ -32,11 +32,11 @@ type WayPoint record {
 
 service / on new http:Listener(9090) {
 
-    resource function get track(string trackingId, string companyName) returns TrackingResponse|error {
+    resource function get track(string trackingId) returns TrackingResponse|error {
         return {
             trackingId: trackingId,
             status: "In Transit",
-            companyName: companyName,
+            companyName: "FedEx",
             wayPoints: [
                 {location: "WH in Denver", timestamp: "2023-01-01T10:00:00Z"},
                 {location: "Transit Hub UK", timestamp: "2023-01-03T14:00:00Z"},

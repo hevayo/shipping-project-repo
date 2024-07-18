@@ -28,8 +28,12 @@ type Order record {
 
 service / on new http:Listener(9090){
 
-    resource function get track(string orderId) returns TrackingResponse|http:NotFound|http:InternalServerError|error? {
-        Order orderRes = check orderClient->get("/order/" + orderId);
+    resource function get track(string orderId) returns TrackingResponse|http:NotFound|http:InternalServerError| string {
+        Order|error orderRes = orderClient->get("/order/" + orderId);
+        if(orderRes is error) {
+            io:println("Error occurred: ", orderRes);
+            return "Order not found";
+        }
         io:println("Order retrieved: ", orderRes);
         return convert(orderRes);
     };

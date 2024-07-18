@@ -4,9 +4,9 @@
 import ballerina/http;
 import ballerina/log;
 
-listener http:Listener ep0 = new (9090, config = {host: "localhost"});
 
-service / on ep0 {
+
+service / on new http:Listener(9090){
     # Get tracking information for an order
     #
     # + orderId - ID of the order to track

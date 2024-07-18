@@ -29,7 +29,7 @@ type Order record {
 service / on new http:Listener(9090){
 
     resource function get track(string orderId) returns TrackingResponse|http:NotFound|http:InternalServerError| string {
-        Order|error orderRes = orderClient->get("/order/" + orderId);
+        Order|error orderRes = orderClient->get("/orders/" + orderId);
         if(orderRes is error) {
             io:println("Error occurred: ", orderRes);
             return "Order not found";

@@ -20,7 +20,7 @@ http:Client orderClient = check new(order_url,
 );
 
 type Order record {
-    string id;
+    int id;
     string trackingNumber;
     string shippingCompany;
 };
@@ -40,7 +40,7 @@ service / on new http:Listener(9090){
 }
 
 function convert(Order orderRes) returns  TrackingResponse => {
-    orderId:  orderRes.id,
+    orderId:  orderRes.id.toString(),
     location: "Colombo",
     previousLocations: [
         {location: "Kandy", timestamp: "2021-01-01T10:00:00Z"},
